@@ -1,0 +1,49 @@
+Rem ===============================================================================================
+Rem      FUNÇÃO PARA COLETA DO CAMPO RECEPTOR_ME23N DE MATERIAL NO TRECHO | TRANSAÇÃO SAP ME23N
+Rem ===============================================================================================
+' TRATAMENTO DE ERRO PARA OS CASOS EM QUE NÃO FOR POSSÍVEL TER O CAMPO RECEPTOR_ME23N ELE IGNORAR E SEGUIR O LOOP
+' APONTAR TBM PARA O DIRETÓRIO PADRÃO QUE AS DEMAIS TRANSAÇÕES ESTÃO ARMAZENANDO
+Function SISMF_GET_DATA_SAP_ME23N
+
+	Dim cmbItem, Entries, Entry
+	Set MY_FILE = fso.CreateTextFile("__REPORT_SISMF_ME23N__.csv", True)
+	MY_FILE.WriteLine("Pedido;Item;RECEPTOR_ME23N")
+	ARRAY_PEDIDOS_ME23N = Array("4510089946")    ' "4510823964","4510089946", "4100890219", "4100878860", "4510388709")  
+	For Each item In ARRAY_PEDIDOS_ME23N
+		session.StartTransaction "ME23N"
+		session.findById("wnd[0]/tbar[1]/btn[17]").press
+		session.findById("wnd[1]/usr/subSUB0:SAPLMEGUI:0003/ctxtMEPO_SELECT-EBELN").text = item
+		session.findById("wnd[1]/usr/subSUB0:SAPLMEGUI:0003/ctxtMEPO_SELECT-EBELN").caretPosition = 10
+		session.findById("wnd[1]").sendVKey 0
+
+      ' DAQUI PRA FRENTE É NECESSÁRIO CLICAR NA ABA "CLASS_CONT" E EM SEGUIDA COPIAR O VALOR DO CAMPO RECEPTOR_ME23N E ESCREVE EM UM CVS
+
+		session.findById("wnd[0]/usr/subSUB0:SAPLMEGUI:0019/subSUB3:SAPLMEVIEWS:1100/subSUB2:SAPLMEVIEWS:1200/subSUB1:SAPLMEGUI:1301/subSUB2:SAPLMEGUI:1303/tabsITEM_DETAIL/tabpTABIDT13/ssubTABSTRIPCONTROL1SUB:SAPLMEVIEWS:1101/subSUB2:SAPLMEACCTVI:0100/subSUB1:SAPLMEACCTVI:1100/txtMEACCT1100-WEMPF").setFocus
+		session.findById("wnd[0]/usr/subSUB0:SAPLMEGUI:0019/subSUB3:SAPLMEVIEWS:1100/subSUB2:SAPLMEVIEWS:1200/subSUB1:SAPLMEGUI:1301/subSUB2:SAPLMEGUI:1303/tabsITEM_DETAIL/tabpTABIDT13/ssubTABSTRIPCONTROL1SUB:SAPLMEVIEWS:1101/subSUB2:SAPLMEACCTVI:0100/subSUB1:SAPLMEACCTVI:1100/txtMEACCT1100-WEMPF").caretPosition = 11
+		Set cmbItem = session.findById("wnd[0]/usr/subSUB0:SAPLMEGUI:0019/subSUB3:SAPLMEVIEWS:1100/subSUB2:SAPLMEVIEWS:1200/subSUB1:SAPLMEGUI:1301/subSUB1:SAPLMEGUI:6000/cmbDYN_6000-LIST")
+		Set Entries = cmbItem.Entries
+		For i = 0 To Entries.Count - 2
+			Set Entry = Entries.Item(i)
+			session.findById("wnd[0]/usr/subSUB0:SAPLMEGUI:0019/subSUB3:SAPLMEVIEWS:1100/subSUB2:SAPLMEVIEWS:1200/subSUB1:SAPLMEGUI:1301/subSUB1:SAPLMEGUI:6000/cmbDYN_6000-LIST").key = Entry.Key
+			RECEPTOR_ME23N = session.findById("wnd[0]/usr/subSUB0:SAPLMEGUI:0019/subSUB3:SAPLMEVIEWS:1100/subSUB2:SAPLMEVIEWS:1200/subSUB1:SAPLMEGUI:1301/subSUB2:SAPLMEGUI:1303/tabsITEM_DETAIL/tabpTABIDT13/ssubTABSTRIPCONTROL1SUB:SAPLMEVIEWS:1101/subSUB2:SAPLMEACCTVI:0100/subSUB1:SAPLMEACCTVI:1100/txtMEACCT1100-WEMPF").Text
+			MY_FILE.WriteLine(item+";"+Entry.Value +";" +RECEPTOR_ME23N)
+		Next
+		session.findById("wnd[0]/tbar[0]/btn[3]").press
+		WshShell.SendKeys "{ENTER}" 
+		WScript.Sleep 1000
+		If Err.Number <> 0 Then
+			For i = 0 To Entries.Count - 2
+				Set Entry = Entries.Item(i)
+				MY_FILE.WriteLine("On_Error"+";"+Entry.Value)
+			Next
+		End If
+			On Error GoTo 0
+	Next
+	MY_FILE.Close
+End Function
+
+
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

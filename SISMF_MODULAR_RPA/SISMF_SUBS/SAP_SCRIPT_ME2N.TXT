@@ -1,0 +1,134 @@
+Rem ===============================================================================================
+Rem             ✅ VERIFICAR DESCRIÇÃO COM A TURMA DO DILIGENCIAMENTO
+Rem ===============================================================================================
+
+Sub SISMF_GET_DATA_SAP_ME2N
+	session.findById("wnd[0]/tbar[0]/okcd").text = ARRAY_SAP_TRANSACTIONS(8)
+	session.findById("wnd[0]").sendVKey FALSE
+	session.findById("wnd[0]/usr/ctxtLISTU").text = "ALV"
+	session.findById("wnd[0]/usr/ctxtSELPA-LOW").setFocus
+	session.findById("wnd[0]/usr/ctxtSELPA-LOW").caretPosition = FALSE
+	session.findById("wnd[0]/usr/btn%_S_WERKS_%_APP_%-VALU_PUSH").press
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").text = "4050"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,1]").text = "4063"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,1]").text = "4064"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,2]").text = "4065"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,3]").text = "1058"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,4]").text = "1054"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,4]").setFocus
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,4]").caretPosition = 4
+	session.findById("wnd[1]/tbar[0]/btn[8]").press
+	session.findById("wnd[0]/usr/ctxtS_EINDT-LOW").text = ARRAY_SAP_GET_DATES(0)
+	session.findById("wnd[0]/usr/ctxtS_EINDT-HIGH").text = ARRAY_SAP_GET_DATES(1)
+	session.findById("wnd[0]/usr/ctxtS_EINDT-HIGH").setFocus
+	session.findById("wnd[0]/usr/ctxtS_EINDT-HIGH").caretPosition = 10
+	session.findById("wnd[0]/tbar[1]/btn[8]").press
+	session.findById("wnd[0]/mbar/menu[5]/menu[0]/menu[1]").select
+	session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").currentCellRow = 230
+	session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").selectedRows = "230"
+	session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").clickCurrentCell
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setColumnWidth "MEMORYTYPE", 29
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").currentCellRow = -1
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EMATN"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TXZ01"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "IDNLF"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELN"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BEDAT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MENGE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MEINS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "NETPR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "NETWR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WAERS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "PEINH"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MGLIEF"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WTLIEF"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MGINV"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WTINV"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EPSTP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LOEKZ"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SUPERFIELD"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KONNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SRM_CONTRACT_ID"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KTPNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EKGRP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MATKL"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "PLIFZ"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WERKS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MWSKZ"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KTWTR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KTWTO"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "OFZWT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KTWRT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "PRIO_URG"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BPRME"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LMEIN"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BSART"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "STATU"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SGT_RCAT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SGT_SCAT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SUBMI"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "INFNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KTMNG"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KTMGR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "OFZMG"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LAMNG"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LAGMG"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "AGDAT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "PRIO_REQ"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EKORG"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "AZPOS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "VENDOR_NAME"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MFRPN"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "PACKNO"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EXSNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LONGNUM"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EXLIN"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BEDNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KDATB"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "FRGKE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ZUTIME"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ICON_PO_HIST"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ICON_COMP_CONS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "FRGGR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KDATE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MFRNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "FRGSX"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "STAPO"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "FRGZU"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TXJCD"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LGORT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "RESLO"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WRF_CHARSTC3_TXT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WRF_CHARSTC3"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WRF_CHARSTC2_TXT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WRF_CHARSTC2"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WRF_CHARSTC1_TXT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WRF_CHARSTC1"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ZUDATE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EHTYP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BSTYP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BSAKZ"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ZZSARBOX"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "PSTYP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MEMORYTYPE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KNTTP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
+	session.findById("wnd[1]/usr/chkCB_ALWAYS").setFocus
+	session.findById("wnd[1]/usr/chkCB_ALWAYS").selected = TRUE
+	session.findById("wnd[1]/tbar[0]/btn[0]").press
+	session.findById("wnd[1]/usr/ctxtDY_PATH").text = GLOBAL_FOLDER_PATH & ARRAY_SAP_TRANSACTIONS(8)
+	session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "__REPORT_SISMF_SAP_"& ARRAY_SAP_TRANSACTIONS(8) &"__.XLSX"
+	session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 19
+	session.findById("wnd[1]/tbar[0]/btn[11]").press
+	session.findById("wnd[0]/tbar[0]/btn[12]").press
+	session.findById("wnd[0]/tbar[0]/btn[12]").press
+    SISMF_CLOSE_EXCEL()
+End Sub
+
+SISMF_GET_DATA_SAP_ME2N()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

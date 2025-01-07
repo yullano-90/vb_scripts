@@ -1,0 +1,39 @@
+Rem ===============================================================================================
+Rem             ✅ FUNÇÃO PARA LOGOFF SAP APÓS EXTRAÇÃO DE DADOS SAP
+Rem ===============================================================================================
+
+Sub SISMF_SAP_LOGOFF
+	Dim lvCount
+	lvCount = 0
+	On Error Resume Next
+	If (Logged = True) Then
+		Session.findById("wnd[0]").close()	
+		Do While (Session.ActiveWindow.Name = "wnd[1]")
+			Session.findById("wnd[1]/usr/btnSPOP-OPTION1").press			
+			lvCount = lvCount + 1
+			If lvCount >= Attempt Then
+				Exit do
+			End If
+		Loop		
+	End If
+	Err.Clear
+	Session = Empty
+	Connection = Empty
+	SapApplication = Empty
+	SapGuiAuto = Empty
+	ObjShell = Empty
+	Logged = False
+
+	Set objShell = CreateObject("WScript.Shell")
+	objShell.AppActivate("SAP Logon 800")
+	objShell.SendKeys "%{F4}"
+
+End Sub
+
+
+SISMF_SAP_LOGOFF()
+
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

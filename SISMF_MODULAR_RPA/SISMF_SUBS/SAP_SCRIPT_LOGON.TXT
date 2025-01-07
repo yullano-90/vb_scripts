@@ -1,0 +1,88 @@
+Rem ===============================================================================================
+Rem                 ✅ VERIFICAÇÃO DE CREDENCIAIS SISMF + FUNÇÃO PARA LOGON SAP
+Rem ===============================================================================================
+
+Sub SISMF_SAP_LOGON
+
+	On Error Resume Next
+	If Not IsObject(SapApplication) Then
+		Set ObjShell = CreateObject("WScript.Shell")
+		ObjShell.Run SAP_PATH
+		WScript.sleep 4000	
+		Set ObjShell = Nothing
+	End If	
+	If Err.Number <> 0 Then
+		Log Now() & " ERRO AO ABRIR O SAP (" & Err.Number & " ) : " & Err.Description 
+		WScript.Quit
+	End If 
+	If Not IsObject(SapApplication) Then	
+		Set SapGuiAuto = GetObject("SAPGUI")	
+		Set SapApplication = SapGuiAuto.GetScriptingEngine()
+	End If		
+	If Not IsObject(Connection) Then
+	   Set Connection = SapApplication.OpenConnection(SapConnectionName, True)
+	End If
+ 
+	If Not IsObject(Session) Then
+	   Set Session = Connection.Sessions(0)	
+	End If
+
+	If IsObject(WScript) Then
+	   WScript.ConnectObject Session,     "on"
+	   WScript.ConnectObject SapApplication, "on"
+	End If
+	If Len(User) > 0 And Len(Pwd) > 0 Then
+		FilePath = "C:\Users\" & User & "\Documents"
+		LogPath = "C:\Users\" & User & "\Documents\logs"
+		Session.findById("wnd[0]/usr/txtRSYST-BNAME").text = SAP_USR
+		Session.findById("wnd[0]/usr/pwdRSYST-BCODE").text = Pwd		
+		Session.findById("wnd[0]").sendVKey 0	
+		If(Session.ActiveWindow.Name = "wnd[1]") Then	
+			Dim lvCount			
+			If(InStr(session.findById("wnd[1]/usr/txtMULTI_LOGON_TEXT").text, SAP_USR) > 0 And _
+			InStr(session.findById("wnd[1]/usr/txtMULTI_LOGON_TEXT").text, "logged") > 0) Then
+				Log "O usuario " & SAP_USR & " já estava logado, rodando novamente em " & TimeInMinutes	& " minutos"
+				session.findById("wnd[1]").close()
+				session.findById("wnd[0]").close()								
+				lvCount = 0
+				Do While (Session.ActiveWindow.Name = "wnd[1]")
+					Session.findById("wnd[1]/usr/btnSPOP-OPTION1").press			
+					lvCount = lvCount + 1
+					If lvCount >= Attempt Then
+						Exit do
+					End If
+				Loop					
+				Logged = False
+			Else
+				lvCount = 0
+				On Error Resume Next
+				Do While (Session.ActiveWindow.Name = "wnd[1]")
+					session.findById("wnd[1]/tbar[0]/btn[0]").press					
+					lvCount = lvCount + 1
+					If lvCount >= Attempt Then
+						Exit do
+					End If
+				Loop
+				If lvCount > 0 Then
+					Logged = True
+				Else
+					Logged = False 
+				End If
+			End If
+		Else			
+			Logged = True
+		End If
+	Else 
+		Log "Error on length of User or Password!"
+		MsgBox("VERIFIQUE SUAS CREDENCIAIS @SISMF")
+		WScript.Quit
+	End If
+End Sub
+
+
+SISMF_SAP_LOGON()
+
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

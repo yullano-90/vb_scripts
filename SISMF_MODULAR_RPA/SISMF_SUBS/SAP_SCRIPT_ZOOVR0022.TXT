@@ -1,0 +1,106 @@
+Rem ===============================================================================================
+Rem             ✅ FUNÇÃO PARA COLETA DE DADOS DE RASTREAMENTO DE COMPRAS | TRANSAÇÃO ZOOVR0022
+Rem ===============================================================================================
+
+Sub SISMF_GET_DATA_SAP_ZOVRMM022
+	session.findById("wnd[0]/tbar[0]/okcd").text = ARRAY_SAP_TRANSACTIONS(5)
+	session.findById("wnd[0]").sendVKey 0
+	session.findById("wnd[0]/usr/btn%_S_WERKS_%_APP_%-VALU_PUSH").press
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").text = "4063"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,1]").text = "4064"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,2]").text = "4065"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,3]").text = "1064"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,4]").text = "1058"
+	session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").caretPosition = 4
+	session.findById("wnd[1]").sendVKey 0
+	session.findById("wnd[1]/tbar[0]/btn[8]").press
+	session.findById("wnd[0]/usr/radRD_DELDT").select
+	session.findById("wnd[0]/usr/ctxtS_DELDT-LOW").text = ARRAY_SAP_GET_DATES(0)
+	session.findById("wnd[0]/usr/ctxtS_DELDT-HIGH").text = ARRAY_SAP_GET_DATES(1)
+	session.findById("wnd[0]/usr/ctxtS_DELDT-HIGH").setFocus
+	session.findById("wnd[0]/usr/ctxtS_DELDT-HIGH").caretPosition = 10
+	session.findById("wnd[0]/tbar[1]/btn[8]").press
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").currentCellRow = -1
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").firstVisibleColumn = "NAME1"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WERKS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "IDDOC"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "RSPOS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BWART"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LIFNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MEINS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KOSTL"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DATE_STO"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DATE_RET"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TIME_RET"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KNTTP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KIT_DELIVERY"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DEL_START_DT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DEL_START_TM"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "APP_START_DT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "APP_START_TM"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "APP_END_DT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "APP_END_TM"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DIVERGENCE_DT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DIVERGENCE_TM"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "UNASSIGN_DEL"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ROUTE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MANIF_STAT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "PROC_QUEUE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BDTER"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "VBELN"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "VBELN_DATE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "USMOV"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DTMOV"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TMMOV"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TBNUM"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TBPOS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "STATUS"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELN"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "AUFNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "RSNUM"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MATNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MAKTX"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MENGE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DATE_DEL"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "STAGE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "RECEIVER_NAME"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DATE_LOA"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ABLAD"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "NAME1"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MJAHR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TIME_STO"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TRIP"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TIME_LOA"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TIME_DEL"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DATE_VEN"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TIME_VEN"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MBLNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ZEILE"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WEMPF"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "RECEIVER"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "DELIVERER"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "POSNR"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "AFNAM"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "CRDAT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WHSDTTARG"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LGORT"
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
+	session.findById("wnd[1]/usr/chkCB_ALWAYS").setFocus
+	session.findById("wnd[1]/usr/chkCB_ALWAYS").selected = true
+	session.findById("wnd[1]/tbar[0]/btn[0]").press
+	session.findById("wnd[1]/usr/ctxtDY_PATH").text = GLOBAL_FOLDER_PATH & ARRAY_SAP_TRANSACTIONS(5)
+	session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "__REPORT_SISMF_SAP_"& ARRAY_SAP_TRANSACTIONS(5) &"__.XLSX"
+	session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 31
+	session.findById("wnd[1]/tbar[0]/btn[11]").press
+	session.findById("wnd[0]/tbar[0]/btn[12]").press
+	session.findById("wnd[0]/tbar[0]/btn[12]").press
+    SISMF_CLOSE_EXCEL()
+End Sub
+
+SISMF_GET_DATA_SAP_ZOVRMM022()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

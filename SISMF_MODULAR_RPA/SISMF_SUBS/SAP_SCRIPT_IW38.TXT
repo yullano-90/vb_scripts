@@ -1,0 +1,45 @@
+Rem ===============================================================================================
+Rem                ✅ FUNÇÃO PARA VERIFICAÇÃO DE STATUS DAS ORDENS DE MANUTENÇÃO
+Rem ===============================================================================================
+Sub SISMF_GET_DATA_SAP_IW38
+	session.findById("wnd[0]/tbar[0]/okcd").text = ARRAY_SAP_TRANSACTIONS(1)
+	session.findById("wnd[0]").sendVKey FALSE
+	session.findById("wnd[0]/usr/chkDY_MAB").selected = TRUE
+	session.findById("wnd[0]/usr/chkDY_HIS").selected = TRUE
+	session.findById("wnd[0]/usr/ctxtGEWRK-LOW").text = ARRAY_SAP_WORK_CENTERS(0)
+	session.findById("wnd[0]/usr/ctxtDATUV").text = ARRAY_SAP_GET_DATES(0)
+	session.findById("wnd[0]/usr/ctxtVARIANT").text = ARRAY_SAP_GET_DATES(1)
+	session.findById("wnd[0]/usr/chkDY_HIS").setFocus
+	session.findById("wnd[0]/tbar[1]/btn[8]").press
+	session.findById("wnd[0]/usr/ctxtDATUV").setFocus
+	session.findById("wnd[0]/usr/ctxtDATUV").caretPosition = 10
+	session.findById("wnd[0]/tbar[1]/btn[8]").press
+	session.findById("wnd[0]/usr/ctxtVARIANT").text = "SISMF_"& ARRAY_SAP_TRANSACTIONS(1)
+	session.findById("wnd[0]/usr/ctxtVARIANT").setFocus
+	session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 9
+	session.findById("wnd[0]/tbar[1]/btn[8]").press
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell -1,""
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
+	session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
+	Session.findById("wnd[1]/usr/chkCB_ALWAYS").setFocus
+	Session.findById("wnd[1]/usr/chkCB_ALWAYS").selected = TRUE
+	Session.findById("wnd[1]/tbar[0]/btn[0]").press
+	Session.findById("wnd[1]/usr/ctxtDY_PATH").setFocus
+	Session.findById("wnd[1]/usr/ctxtDY_PATH").caretPosition = FALSE
+	Session.findById("wnd[1]").sendVKey 4
+	Session.findById("wnd[2]/usr/ctxtDY_PATH").text = GLOBAL_FOLDER_PATH & ARRAY_SAP_TRANSACTIONS(1)
+	Session.findById("wnd[2]/usr/ctxtDY_FILENAME").text = "__REPORT_SISMF_SAP_"& ARRAY_SAP_TRANSACTIONS(1) &"__.XLSX"
+	Session.findById("wnd[2]/usr/ctxtDY_FILENAME").caretPosition = 26
+	Session.findById("wnd[2]/tbar[0]/btn[11]").press
+	Session.findById("wnd[1]/tbar[0]/btn[11]").press
+	Session.findById("wnd[0]/tbar[0]/btn[12]").press
+	Session.findById("wnd[0]/tbar[0]/btn[12]").press
+	SISMF_CLOSE_EXCEL()
+End Sub
+
+SISMF_GET_DATA_SAP_IW38()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

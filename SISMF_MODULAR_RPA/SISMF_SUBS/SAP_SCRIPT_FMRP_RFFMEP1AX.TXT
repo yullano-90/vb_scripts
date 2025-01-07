@@ -1,0 +1,145 @@
+Rem ===============================================================================================
+Rem             ✅ FUNÇÃO PARA COLETA DE DADOS DO EMPENHO E COMPROMISSO DA GESTÃO ECONÔMICA
+Rem ===============================================================================================
+
+Sub SISMF_GET_DATA_SAP_FMRP_RFFMEP1AX
+	Dim today, currentYear, currentMonth
+	today = Date()
+	currentYear = Year(today)
+	currentMonth = Month(today)
+    session.findById("wnd[0]/tbar[0]/okcd").text = ARRAY_SAP_TRANSACTIONS(9)
+    session.findById("wnd[0]").sendVKey FALSE
+    session.findById("wnd[0]/usr/ctxtP_KDATE").text = ARRAY_SAP_GET_DATES(0)
+    session.findById("wnd[0]/usr/txtP_FYR_FR").text = currentYear	' "2024"
+    session.findById("wnd[0]/usr/txtP_FYR_TO").text = currentYear	' "2024"
+    session.findById("wnd[0]/usr/txtP_MAXSEL").text = "1000"
+    session.findById("wnd[0]/usr/txtP_MAXSEL").setFocus
+    session.findById("wnd[0]/usr/txtP_MAXSEL").caretPosition = 11
+    session.findById("wnd[0]/tbar[1]/btn[17]").press
+    session.findById("wnd[1]/usr/txtENAME-LOW").text = "01758466"
+    session.findById("wnd[1]/usr/txtENAME-LOW").setFocus
+    session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 8
+    session.findById("wnd[1]/tbar[0]/btn[8]").press
+    session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "0"
+    session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").doubleClickCurrentCell
+    session.findById("wnd[0]/usr/ctxtP_KDATE").text = ARRAY_SAP_GET_DATES(1)
+    session.findById("wnd[0]/usr/txtP_FYR_FR").text = currentYear	' "2024"
+    session.findById("wnd[0]/usr/txtP_PER_FR").text = currentMonth	' "01"
+    session.findById("wnd[0]/usr/txtP_FYR_TO").text = currentYear	' "2024"
+    session.findById("wnd[0]/usr/txtP_PER_TO").text = currentMonth	' "10"
+    session.findById("wnd[0]/usr/ctxtP_KDATE").setFocus
+    session.findById("wnd[0]/usr/ctxtP_KDATE").caretPosition = 10
+    session.findById("wnd[0]/tbar[1]/btn[8]").press
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").currentCellRow = 9
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "WTEXT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "WRTTP"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "PRCTR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FICTR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "CNAME"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FIPEX"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "PNAME"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "REFBN"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "XBLNR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "KIDNO"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "RFPOS"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "PERIO7"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "BUDAT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FWAER"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FKBTRP"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "TWAER"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "TRBTRP"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "AUFNR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "ATEXT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "BOSSID"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "VRGNG"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "LIFNR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "NAME1"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "SGTXT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "VREFBT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "VREFBN"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "USNAM"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "XEZER"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "XREVS"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "TCODE"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "CFCNT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "ERLKZ"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "PSOSG"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "PSOAK"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FINUSE"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "STGRD"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "BSTAT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FKBTRC"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FIKRS"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FONDS"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FNAME"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "SPONSOR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FUND_TYPE"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FUND_TYPET"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "POTYP"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FIVOR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "RFORG"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "BTART"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "BTEXT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "STATS"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "STATT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "GJAHR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "PERIO"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "ZHLDT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "TRANR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "CTRNR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "BUKRS"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "HKONT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "MEASURE"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "ME_SHORT_DESC"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "ME_DESCRIPTION"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "CFLEV"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "USERDIM"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "VRFPOS"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "KOKRS"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "KOSTL"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "KTEXT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "POSID"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "POST1"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "PRCTRT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "AWTYP"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "AWREF"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "AWORG"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "AWSYS"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "VOGJAHR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "VOBELNR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "VOBUZEI"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "KNGJAHR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "KUNNR"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "CF_FLAG"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "VTEXT"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "TRBTRC"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "FKBTRW"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectColumn "TRBTRW"
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").contextMenu
+    session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell/shellcont[1]/shell").selectContextMenuItem "&XXL"
+    session.findById("wnd[1]/tbar[0]/btn[0]").press
+    session.findById("wnd[1]/usr/ctxtDY_PATH").setFocus
+    session.findById("wnd[1]/usr/ctxtDY_PATH").caretPosition = 0
+    session.findById("wnd[1]").sendVKey 4
+    session.findById("wnd[2]/usr/ctxtDY_PATH").setFocus
+    session.findById("wnd[2]/usr/ctxtDY_PATH").caretPosition = 0
+    session.findById("wnd[2]").sendVKey 4
+    session.findById("wnd[3]/usr/ctxtDY_PATH").text = GLOBAL_FOLDER_PATH & ARRAY_SAP_TRANSACTIONS(9)
+    session.findById("wnd[3]/usr/ctxtDY_PATH").setFocus
+    session.findById("wnd[3]/usr/ctxtDY_PATH").caretPosition = 87
+    session.findById("wnd[3]/tbar[0]/btn[11]").press
+    session.findById("wnd[2]/usr/ctxtDY_FILENAME").text = "__REPORT_SISMF_SAP_"& ARRAY_SAP_TRANSACTIONS(9) &"__.XLSX"
+    session.findById("wnd[2]/usr/ctxtDY_FILENAME").setFocus
+    session.findById("wnd[2]/usr/ctxtDY_FILENAME").caretPosition = 18
+    session.findById("wnd[2]/tbar[0]/btn[11]").press
+    session.findById("wnd[1]/tbar[0]/btn[11]").press
+    session.findById("wnd[0]/tbar[0]/btn[3]").press
+    session.findById("wnd[0]/tbar[0]/btn[3]").press
+    SISMF_CLOSE_EXCEL()
+End Sub
+
+SISMF_GET_DATA_SAP_FMRP_RFFMEP1AX()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

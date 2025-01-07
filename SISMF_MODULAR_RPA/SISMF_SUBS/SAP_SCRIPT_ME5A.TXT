@@ -1,0 +1,131 @@
+Rem ===============================================================================================
+Rem             ✅ COLETA DE METADADOS DE REQUISIÇÕES DE COMPRAS SAP
+Rem ===============================================================================================
+
+Sub SISMF_GET_DATA_SAP_ME5A
+
+	Dim i, X, ARRAY_SAP_ME5A_DATES(21, 1)
+	X = 20
+
+	ARRAY_SAP_ME5A_DATES(0, 0) = "01.01.2023"
+	ARRAY_SAP_ME5A_DATES(0, 1) = "08.01.2023"
+	ARRAY_SAP_ME5A_DATES(1, 0) = "10.01.2023"
+	ARRAY_SAP_ME5A_DATES(1, 1) = "31.01.2023"
+	ARRAY_SAP_ME5A_DATES(2, 0) = "01.02.2023"
+	ARRAY_SAP_ME5A_DATES(2, 1) = "08.02.2023"
+	ARRAY_SAP_ME5A_DATES(3, 0) = "11.02.2023"
+	ARRAY_SAP_ME5A_DATES(3, 1) = "14.02.2023"
+	ARRAY_SAP_ME5A_DATES(4, 0) = "15.02.2023"
+	ARRAY_SAP_ME5A_DATES(4, 1) = "28.02.2023"
+	ARRAY_SAP_ME5A_DATES(5, 0) = "01.03.2023"
+	ARRAY_SAP_ME5A_DATES(5, 1) = "06.03.2023"
+	ARRAY_SAP_ME5A_DATES(6, 0) = "09.03.2023"
+	ARRAY_SAP_ME5A_DATES(6, 1) = "14.03.2023"
+	ARRAY_SAP_ME5A_DATES(7, 0) = "15.03.2023"
+	ARRAY_SAP_ME5A_DATES(7, 1) = "31.03.2023"
+	ARRAY_SAP_ME5A_DATES(8, 0) = "01.04.2023"
+	ARRAY_SAP_ME5A_DATES(8, 1) = "08.04.2023"
+	ARRAY_SAP_ME5A_DATES(9, 0) = "10.04.2023"
+	ARRAY_SAP_ME5A_DATES(9, 1) = "14.04.2023"
+	ARRAY_SAP_ME5A_DATES(10, 0) = "15.04.2023"
+	ARRAY_SAP_ME5A_DATES(10, 1) = "30.04.2023"
+	ARRAY_SAP_ME5A_DATES(11, 0) = "01.05.2023"
+	ARRAY_SAP_ME5A_DATES(11, 1) = "31.05.2023"
+	ARRAY_SAP_ME5A_DATES(12, 0) = "01.06.2023"
+	ARRAY_SAP_ME5A_DATES(12, 1) = "30.06.2023"
+	ARRAY_SAP_ME5A_DATES(13, 0) = "01.07.2023"
+	ARRAY_SAP_ME5A_DATES(14, 1) = "31.07.2023"
+	ARRAY_SAP_ME5A_DATES(14, 0) = "01.08.2023"
+	ARRAY_SAP_ME5A_DATES(14, 1) = "31.08.2023"
+	ARRAY_SAP_ME5A_DATES(15, 0) = "01.09.2023"
+	ARRAY_SAP_ME5A_DATES(15, 1) = "30.09.2023"
+	ARRAY_SAP_ME5A_DATES(16, 0) = "01.10.2023"
+	ARRAY_SAP_ME5A_DATES(16, 1) = "31.10.2023"
+	ARRAY_SAP_ME5A_DATES(17, 0) = "01.11.2023"
+	ARRAY_SAP_ME5A_DATES(17, 1) = "30.11.2023"
+	ARRAY_SAP_ME5A_DATES(18, 0) = "01.12.2023"
+	ARRAY_SAP_ME5A_DATES(18, 1) = "31.12.2023"
+	ARRAY_SAP_ME5A_DATES(19, 0) = "01.01.2024"
+	ARRAY_SAP_ME5A_DATES(19, 1) = "23.06.2024"
+	ARRAY_SAP_ME5A_DATES(20, 0) = "26.06.2024"
+	ARRAY_SAP_ME5A_DATES(20, 1) = "31.12.9999"
+
+	'For i = 0 To UBound(ARRAY_SAP_ME5A_DATES, 1)
+		session.findById( "wnd[0]/tbar[0]/okcd" ).text = ARRAY_SAP_TRANSACTIONS(4)
+		session.findById( "wnd[0]" ).sendVKey 0
+		session.findById("wnd[0]/usr/ctxtP_LSTUB").text = "ALV"
+		session.findById("wnd[0]/usr/ctxtP_LSTUB").setFocus
+		session.findById("wnd[0]/usr/ctxtP_LSTUB").caretPosition = 3
+		session.findById("wnd[0]/usr/btn%_S_WERKS_%_APP_%-VALU_PUSH").press
+		session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").text = "1058"
+		session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,1]").text = "1064"
+		session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,2]").text = "1054"
+		session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,3]").text = "4050"
+		session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,4]").text = "4063"
+		session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,5]").text = "4064"
+		session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,6]").text = "4065"
+		session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,6]").setFocus
+		session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,6]").caretPosition = 4
+		session.findById("wnd[1]/tbar[0]/btn[0]").press
+		session.findById("wnd[1]/tbar[0]/btn[8]").press
+		' session.findById("wnd[0]/usr/ctxtS_FRGDT-LOW").text = ARRAY_SAP_ME5A_DATES(i, 0)
+		' session.findById("wnd[0]/usr/ctxtS_FRGDT-HIGH").text = ARRAY_SAP_ME5A_DATES(i, 1)
+
+		session.findById("wnd[0]/usr/ctxtS_FRGDT-LOW").text = ARRAY_SAP_ME5A_DATES(X, 0)
+		session.findById("wnd[0]/usr/ctxtS_FRGDT-HIGH").text = ARRAY_SAP_ME5A_DATES(X, 1)
+
+		session.findById("wnd[0]/usr/ctxtS_LFDAT-HIGH").setFocus
+		session.findById("wnd[0]/usr/ctxtS_LFDAT-HIGH").caretPosition = 10
+		session.findById("wnd[0]/tbar[1]/btn[8]").press
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").currentCellRow = 1
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ERNAM"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "AFNAM"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WERKS"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LFDAT"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KNTTP"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BANFN"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BNFPO"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BADAT"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "FRGDT"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELN"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EBELP"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BEDAT"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MENGE"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MATNR"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "TXZ01"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "MEINS"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "PREIS"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "GSWRT"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "ZZJ_1BNBM"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "FNAME1"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "BSART"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "LOEKZ"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EKGRP"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "EKORG"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "KONNR"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "WAERS"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "IDNLF"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "PLIFZ"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectColumn "SRM_CONTRACT_ID"
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").contextMenu
+		session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectContextMenuItem "&XXL"
+		session.findById("wnd[1]/tbar[0]/btn[0]").press
+		session.findById("wnd[1]/tbar[0]/btn[0]").press
+		session.findById("wnd[1]/tbar[0]/btn[0]").press 
+		session.findById("wnd[1]/usr/ctxtDY_PATH").text = GLOBAL_FOLDER_PATH & ARRAY_SAP_TRANSACTIONS(4)
+		'session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "__REPORT_SISMF_" & ARRAY_SAP_TRANSACTIONS(4) & "__" & ARRAY_SAP_ME5A_DATES(i, 0) & "_" & ARRAY_SAP_ME5A_DATES(i, 1) & "__.XLSX"
+		session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "__REPORT_SISMF_ME5A__" & ARRAY_SAP_ME5A_DATES(X, 0) & "_" & ARRAY_SAP_ME5A_DATES(X, 1) & "__.XLSX"
+		session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 49
+		session.findById("wnd[1]/tbar[0]/btn[11]").press
+		session.findById("wnd[0]/tbar[0]/btn[15]").press
+		session.findById("wnd[0]/tbar[0]/btn[15]").press
+		SISMF_CLOSE_EXCEL()
+	'Next
+End Sub
+
+
+SISMF_GET_DATA_SAP_ME5A()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

@@ -1,0 +1,120 @@
+Rem ========================================================================================================
+Rem		RPA - AUTOMACAO ROBÓTICA DE PROCESSOS SAP vs 1.0.309
+Rem		DESENVOLVEDOR E SYSADMIN: IULANO SILVA DOS SANTOS
+Rem ========================================================================================================
+
+Option Explicit
+
+Set fso = CreateObject("Scripting.FileSystemObject")
+Set WshShell = WScript.CreateObject("WScript.Shell")
+Set OBJ_NETWORK = CreateObject("WScript.Network")
+userInput = "#################"
+Pwd	= userInput
+strUserName = OBJ_NETWORK.UserName
+User  = strUserName
+SAP_USR  = User
+START_DATE = "00.00.0000"
+
+
+Rem ===============================================================================================
+Rem           USUÁRIOS SISMF DE APROVISIONAMENTO DE MATERIAIS
+Rem ===============================================================================================
+Dim ARRAY_PROVISIONERS
+Set ARRAY_PROVISIONERS = CreateObject("Scripting.Dictionary")
+ARRAY_PROVISIONERS.Add "0", "USER_0@SISMF.COM"
+ARRAY_PROVISIONERS.Add "1", "USER_1@SISMF.COM"
+ARRAY_PROVISIONERS.Add "2", "USER_2@SISMF.COM"
+ARRAY_PROVISIONERS.Add "3", "USER_3@SISMF.COM"
+ARRAY_PROVISIONERS.Add "4", "USER_4@SISMF.COM"
+ARRAY_PROVISIONERS.Add "5", "USER_5@SISMF.COM"
+ARRAY_PROVISIONERS.Add "6", "USER_6@SISMF.COM"
+ARRAY_PROVISIONERS.Add "7", "USER_7@SISMF.COM"
+
+ARRAY_SAP_TRANSACTIONS = Array("IW28", "IW38", "ME2M", "ME23N", "ME5A", "ZOVRMM022", "ZMKRMM004", "ZEPRMM012", "ME2N", "FMRP_RFFMEP1AX")
+ARRAY_SAP_COST_CENTERS = Array("1058", "4063", "4063", "1064" , "4050", "4064", "4065")
+ARRAY_SAP_WORK_CENTERS = Array("ECEE10*")
+TODAY = Replace(Date(), "/", ".")
+ARRAY_SAP_GET_DATES = Array(START_DATE , TODAY)
+
+GLOBAL_FOLDER_PATH = "C:\Users\" & strUserName & "\OneDrive - SISMF S.A\DESKTOP\SISMF_DATASETS_SAP___\"
+SAP_PATH = """C:\Program Files\SAP\FrontEnd\SAPGUI\saplogon.exe"""
+ReceiverAddress = "http://IP/Site/Controller/Action"
+SapConnectionName = "01 - ECC - EP0 - Production"
+TimeInMinutes = 5
+Logged = FALSE
+Attempt = 4
+LogPath = ""
+
+
+Rem ===============================================================================================
+Rem           OBJETOS E VARIÁVEIS GLOBAIS DE INTERAÇÃO ENTRE LAYER S.O E SAP ERP
+Rem ===============================================================================================
+Dim OBJ_WMI_SERVICE, OBJ_NETWORK, ObjShell, WshShell, SAP_PATH
+Dim fso
+Dim RECEPTOR_ME23N
+Dim i
+Dim item
+Dim ReceiverAddress
+Dim TimeInMinutes
+Dim strUserName
+Dim userInput
+Dim objProcess
+Dim colProcess
+Dim FilePath
+Dim Logged
+Dim SapApplication
+Dim application
+Dim SapGuiAuto
+Dim SapConnectionName
+Dim SAP_USR
+Dim User
+Dim Pwd
+Dim LogPath
+Dim FileName
+Dim OutputFile
+Dim Connection
+Dim Session
+Dim Attempt
+
+Dim INDEX, TODAY, MY_FILE, START_DATE
+
+Dim ARRAY_SAP_PURCHASE_ORDERS
+Dim ARRAY_SAP_TRANSACTIONS
+Dim ARRAY_SAP_COST_CENTERS
+Dim ARRAY_SAP_WORK_CENTERS
+Dim ARRAY_PEDIDOS_ME23N
+Dim ARRAY_SAP_GET_DATES
+Dim SISMF_PUBLIC_PATH
+Dim SISMF_PRIVATE_PATH
+Dim GLOBAL_FOLDER_PATH
+'Dim ARRAY_SAP_ME5A_DATES(39)
+
+
+
+If Len(User) > 0  And Len(TimeInMinutes) > 0 Then
+	Call Main()
+Else
+	MsgBox("VERIFIQUE SUAS CREDENCIAIS @SISMF")
+	WScript.Quit
+End If
+
+
+
+Sub SISMF_PLAY
+    Dim CODE, FILE
+    Set FSO = CreateObject("Scripting.FileSystemObject")
+    Set FILE = FSO.OpenTextFile("SISMF_SUBS\SAP_SCRIPT_LOOP_CALLS.TXT", 1)
+    CODE = FILE.ReadAll()
+    FILE.Close()
+	ExecuteGlobal CODE
+End Sub
+
+
+
+Sub Main()
+	SISMF_PLAY()
+End Sub
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

@@ -1,0 +1,29 @@
+Rem ===============================================================================================
+Rem             ✅ LOOP DE CHAMADAS DAS OPERAÇÕES SAP
+Rem ===============================================================================================
+
+Sub SISMF_SAP_CALLS
+    Dim scripts, scriptName, FSO, FILE, CODE
+
+    scripts = Array(	"SAP_SCRIPT_LOGON.SISMF", _
+                    	"SISMF_CLOSE_EXCEL.SISMF", _
+			"SISMF_SIGNATURE.SISMF", _
+			"SAP_SCRIPT_ME5A.SISMF", _
+			"SAP_SCRIPT_LOGOFF.SISMF")
+
+    Set FSO = CreateObject("Scripting.FileSystemObject")
+
+    For Each scriptName In scripts
+        Set FILE = FSO.OpenTextFile("SISMF_SUBS\" & scriptName, 1)
+        CODE = FILE.ReadAll()
+        FILE.Close()
+        ExecuteGlobal CODE
+    Next
+End Sub
+
+SISMF_SAP_CALLS()
+
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

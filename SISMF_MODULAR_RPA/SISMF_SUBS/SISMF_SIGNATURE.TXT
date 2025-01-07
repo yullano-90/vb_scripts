@@ -1,0 +1,36 @@
+Rem ===============================================================================================
+Rem             ✅ ASSINATURA PADRÃO DE LOG DE EXECUÇÃO SISMF_RPA_SAP_DATA
+Rem ===============================================================================================
+
+Sub SISMF_SIGNATURE
+	Dim currentDateTime, today_
+	currentDateTime = Now
+	today_ = Replace(Date(), "/", ".")
+	Dim folderPath, fileName 
+	folderPath = GLOBAL_FOLDER_PATH
+	fileName = "SISMF_RPA_LOG_" & today_ &".TXT"
+	Dim objFSO
+	Set objFSO = CreateObject("Scripting.FileSystemObject")
+	If Not objFSO.FolderExists(folderPath) Then
+		objFSO.CreateFolder(folderPath)
+	End If
+	Dim objFile
+	Set objFile = objFSO.CreateTextFile(folderPath & "\" & fileName, True)
+	Dim SISMF_LOG(8)
+	SISMF_LOG(0) = "============================================================================="
+	SISMF_LOG(1) = vbCrLf & "SISMF_EFC: SISTEMA DE GESTAO DE MATERIAIS FERROVIARIOS" & vbCrLf
+	SISMF_LOG(3) = "SISMF_RPA: AUTOMACAO ROBOTICA DE PROCESSOS" & vbCrLf
+	SISMF_LOG(5) = "DEVELOPER & SYSADMIN: IULANO SILVA DOS SANTOS" & vbCrLf
+	SISMF_LOG(6) = SISMF_LOG(1) & SISMF_LOG(3) & SISMF_LOG(5)
+	SISMF_LOG(7) = vbCrLf & "LOG DO USUARIO EXECUTANTE DO SCRIPT: " & strUserName & " - " & currentDateTime & vbCrLf
+	objFile.WriteLine(SISMF_LOG(0) & SISMF_LOG(6) & SISMF_LOG(0) & vbCrLf & SISMF_LOG(7) & SISMF_LOG(0))
+	objFile.Close
+	Set objFile = Nothing
+	Set objFSO = Nothing
+End Sub
+
+SISMF_SIGNATURE()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

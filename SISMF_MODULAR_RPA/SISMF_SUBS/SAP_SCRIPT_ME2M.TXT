@@ -1,0 +1,55 @@
+Rem ===============================================================================================
+Rem             ✅ FUNÇÃO PARA COLETA DE NOTAS FISCAIS E DATA DE ENTREGA NO F1
+Rem ===============================================================================================
+
+Sub SISMF_GET_DATA_SAP_ME2M
+    SISMF_READ_FILE_ORDES()
+    For Each INDEX In ARRAY_SAP_PURCHASE_ORDERS
+        On Error Resume Next
+        Err.Clear
+        session.findById("wnd[0]/tbar[0]/okcd").text = ARRAY_SAP_TRANSACTIONS(2)
+        session.findById("wnd[0]").sendVKey FALSE
+        session.findById("wnd[0]/usr/ctxtLISTU").text = "ALV"
+        session.findById("wnd[0]/usr/ctxtLISTU").setFocus
+        session.findById("wnd[0]/usr/ctxtLISTU").caretPosition = 3
+        session.findById("wnd[0]/usr/btn%_S_EBELN_%_APP_%-VALU_PUSH").press
+        session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").text = INDEX
+        session.findById("wnd[1]").sendVKey FALSE
+        session.findById("wnd[1]/tbar[0]/btn[8]").press
+        session.findById("wnd[0]/tbar[1]/btn[8]").press
+        Dim rowCount
+        rowCount = session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").rowCount
+        Dim i
+        For i = 0 To rowCount - 1
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell i, "ICON_PO_HIST"
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").doubleClickCurrentCell
+            session.findById("wnd[1]/usr/subPO_HISTORY:SAPLMMHIPO:0100/cntlMEALV_GRID_CONTROL_MMHIPO/shellcont/shell").pressToolbarContextButton "&MB_VIEW"
+            session.findById("wnd[1]/usr/subPO_HISTORY:SAPLMMHIPO:0100/cntlMEALV_GRID_CONTROL_MMHIPO/shellcont/shell").pressToolbarContextButton "&MB_EXPORT"
+            session.findById("wnd[1]/usr/subPO_HISTORY:SAPLMMHIPO:0100/cntlMEALV_GRID_CONTROL_MMHIPO/shellcont/shell").selectContextMenuItem "&XXL"
+            session.findById("wnd[2]/usr/ctxtDY_PATH").text = GLOBAL_FOLDER_PATH & ARRAY_SAP_TRANSACTIONS(2)
+            session.findById("wnd[2]/usr/ctxtDY_FILENAME").text = "__REPORT_SISMF_SAP_PEDIDO_" & INDEX & "_LINHA_" & (i + 1) & "__" & ARRAY_SAP_TRANSACTIONS(2) & "__.XLSX"
+            session.findById("wnd[2]/usr/ctxtDY_PATH").setFocus
+            session.findById("wnd[2]/usr/ctxtDY_PATH").caretPosition = 57
+            session.findById("wnd[2]/tbar[0]/btn[11]").press
+            session.findById("wnd[1]").close
+            WshShell.SendKeys "{ENTER}"
+            WScript.Sleep 1000
+            SISMF_CLOSE_EXCEL()
+        Next
+        session.findById("wnd[0]/tbar[0]/btn[12]").press
+        session.findById("wnd[0]/tbar[0]/btn[12]").press
+        WshShell.SendKeys "{ENTER}"
+        WScript.Sleep 1000
+        If Err.Number <> 0 Then
+            WshShell.SendKeys "{ENTER}"
+            WScript.Sleep 1000
+        End If
+        On Error GoTo 0
+    Next
+End Sub
+
+SISMF_GET_DATA_SAP_ME2M()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

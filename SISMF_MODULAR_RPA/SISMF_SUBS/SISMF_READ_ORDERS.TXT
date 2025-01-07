@@ -1,0 +1,20 @@
+Rem ===============================================================================================
+Rem             ✅ SUB PROCEDIMENTO PARA LEITURA DO ARQUIVO GLOBAL DE PEDIDOS SISMF
+Rem ===============================================================================================
+
+Sub SISMF_READ_FILE_ORDES
+	ReDim ARRAY_SAP_PURCHASE_ORDERS(0)
+	Dim arquivo, linha
+	Set arquivo = fso.OpenTextFile("C:\Users\" & strUserName & "\OneDrive - Vale S.A\SISMF_DATASETS\PEDIDOS_SAP.txt", 1)
+	Do Until arquivo.AtEndOfStream
+        linha = arquivo.ReadLine
+        ReDim Preserve ARRAY_SAP_PURCHASE_ORDERS(i)
+        ARRAY_SAP_PURCHASE_ORDERS(i) = linha
+        i = i + 1
+    Loop
+	arquivo.Close
+End Sub
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

@@ -1,0 +1,17 @@
+Rem ===============================================================================================
+Rem             ✅ FUNÇÃO PARA FECHAR O EXCEL APÓS COLETA DE DADOS SAP
+Rem ===============================================================================================
+Sub SISMF_CLOSE_EXCEL
+    Set OBJ_WMI_SERVICE = GetObject("winmgmts:" & "{impersonationLevel=impersonate}!\\.\root\cimv2")
+    Set colProcess = OBJ_WMI_SERVICE.ExecQuery("Select * from Win32_Process Where Name = 'EXCEL.EXE'")
+    For Each objProcess in colProcess
+        objProcess.Terminate()
+    Next
+    WScript.Sleep 10000
+End Sub
+
+SISMF_CLOSE_EXCEL()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

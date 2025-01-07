@@ -1,0 +1,65 @@
+Rem ===============================================================================================
+Rem             ✅ FUNÇÃO PARA COLETA DE DADOS DEVOLUÇÃO DE PEDIDOS SAP
+Rem ===============================================================================================
+
+Sub SISMF_GET_DATA_SAP_ZMKRMM004
+    Dim key
+    For Each key In ARRAY_PROVISIONERS.Keys
+        session.findById("wnd[0]/tbar[0]/okcd").text = ARRAY_SAP_TRANSACTIONS(6)
+        session.findById("wnd[0]").sendVKey FALSE
+        session.findById("wnd[0]/usr/btn%_S_ERNAM_%_APP_%-VALU_PUSH").press
+        session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/txtRSCSEL_255-SLOW_I[1,0]").text = key
+        session.findById("wnd[1]/tbar[0]/btn[8]").press
+        session.findById("wnd[0]/usr/ctxtS_BADAT-LOW").text = ARRAY_SAP_GET_DATES(0)
+        session.findById("wnd[0]/usr/ctxtS_BADAT-HIGH").text = ARRAY_SAP_GET_DATES(1)
+        session.findById("wnd[0]/usr/ctxtS_BADAT-HIGH").setFocus
+        session.findById("wnd[0]/usr/ctxtS_BADAT-HIGH").caretPosition = 10
+        session.findById("wnd[0]/tbar[1]/btn[8]").press
+        session.findById("wnd[0]/shellcont/shell").pressToolbarButton "&FIND"
+        session.findById("wnd[1]").close
+        session.findById("wnd[0]/shellcont/shell").pressToolbarButton "&MB_FILTER"
+        session.findById("wnd[1]/usr/subSUB_DYN0500:SAPLSKBH:0600/cntlCONTAINER1_FILT/shellcont/shell").currentCellRow = 1
+        session.findById("wnd[1]/usr/subSUB_DYN0500:SAPLSKBH:0600/cntlCONTAINER1_FILT/shellcont/shell").selectAll
+        session.findById("wnd[1]/usr/subSUB_DYN0500:SAPLSKBH:0600/btnAPP_WL_SING").press
+        session.findById("wnd[1]/tbar[0]/btn[0]").press
+        session.findById("wnd[0]/shellcont/shell").currentCellRow = -1
+        session.findById("wnd[0]/shellcont/shell").selectColumn "AUFNR"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "PSPID"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "NPLNR"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "BANFN"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "BNFPO"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "MATNR"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "TXZ01"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "EXTROW"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "SRVPOS"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "KTEXT1"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "REJ_STATUS"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "ZSTATUS_DESC"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "RREAS"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "ZZREJ_DATE"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "EKGRP"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "FRGDT"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "ZSTATUS_CODE"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "EBELN"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "WERKS"
+        session.findById("wnd[0]/shellcont/shell").selectColumn "ERNAM"
+        session.findById("wnd[0]/shellcont/shell").contextMenu
+        session.findById("wnd[0]/shellcont/shell").selectContextMenuItem "&XXL"
+        session.findById("wnd[1]/usr/chkCB_ALWAYS").setFocus
+        session.findById("wnd[1]/usr/chkCB_ALWAYS").selected = true
+        session.findById("wnd[1]/tbar[0]/btn[0]").press
+        session.findById("wnd[1]/usr/ctxtDY_PATH").text = GLOBAL_FOLDER_PATH & ARRAY_SAP_TRANSACTIONS(6)
+        session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "__REPORT_SISMF_SAP_" &  key & "_" & ARRAY_SAP_TRANSACTIONS(6) & "__.XLSX"
+        session.findById("wnd[1]/usr/ctxtDY_FILENAME").caretPosition = 24
+        session.findById("wnd[1]/tbar[0]/btn[11]").press
+        session.findById("wnd[0]/tbar[0]/btn[3]").press
+        session.findById("wnd[0]/tbar[0]/btn[3]").press
+        SISMF_CLOSE_EXCEL()
+    Next
+End Sub
+
+SISMF_GET_DATA_SAP_ZMKRMM004()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================

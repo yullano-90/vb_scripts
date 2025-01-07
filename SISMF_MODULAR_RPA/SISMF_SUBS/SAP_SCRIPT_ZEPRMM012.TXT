@@ -1,0 +1,78 @@
+Rem ===============================================================================================
+Rem             ✅ ROTINA PARA COLETA DE DADOS DO WORKFLOW DE APROVAÇÃO DO GESTOR
+Rem ===============================================================================================
+
+Sub SISMF_GET_DATA_SAP_ZEPRMM012
+	Dim INDEX_ZEP
+	For Each INDEX_ZEP in ARRAY_SAP_COST_CENTERS
+		On Error Resume Next
+		session.findById("wnd[0]/tbar[0]/okcd").text = ARRAY_SAP_TRANSACTIONS(7)
+		session.findById("wnd[0]").sendVKey 0
+		session.findById("wnd[0]/usr/txtP_YEAR").text = "2024"
+		session.findById("wnd[0]/usr/ctxtP_TP_DOC").setFocus
+		session.findById("wnd[0]/usr/ctxtP_TP_DOC").caretPosition = 0
+		session.findById("wnd[0]").sendVKey 4
+		session.findById("wnd[1]").sendVKey 2
+		session.findById("wnd[0]/usr/ctxtP_BUKRS").setFocus
+		session.findById("wnd[0]/usr/ctxtP_BUKRS").caretPosition = 0
+		session.findById("wnd[0]").sendVKey 4
+		session.findById("wnd[1]/usr/lbl[1,5]").setFocus
+		session.findById("wnd[1]/usr/lbl[1,5]").caretPosition = 2
+		session.findById("wnd[1]").sendVKey 2
+		session.findById("wnd[0]/usr/radP_NORDES").select
+		session.findById("wnd[0]/usr/ctxtS_PERIO-LOW").text = ARRAY_SAP_GET_DATES(0)
+		session.findById("wnd[0]/usr/ctxtS_PERIO-HIGH").text = ARRAY_SAP_GET_DATES(1)
+		session.findById("wnd[0]/usr/ctxtP_PLANT").text = INDEX_ZEP
+		session.findById("wnd[0]/usr/radP_NORDES").setFocus
+		session.findById("wnd[0]/tbar[1]/btn[8]").press
+		session.findById("wnd[0]/usr/ctxtS_PERIO-HIGH").text = ARRAY_SAP_GET_DATES(1)
+		session.findById("wnd[0]/usr/ctxtS_PERIO-HIGH").setFocus
+		session.findById("wnd[0]/usr/ctxtS_PERIO-HIGH").caretPosition = 7
+		session.findById("wnd[0]/tbar[1]/btn[8]").press
+		session.findById("wnd[0]/usr/ctxtS_PERIO-HIGH").text = ARRAY_SAP_GET_DATES(1)
+		session.findById("wnd[0]/tbar[1]/btn[8]").press
+		session.findById("wnd[0]/shellcont[1]/shell").setCurrentCell -1,"COMMENTS"
+		session.findById("wnd[0]/shellcont[1]/shell").firstVisibleColumn = "MAIN_LEVEL"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "DOCUMENT"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "TYPE"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "VALUE"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "WAERS"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "BUKRS"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "WERKS"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "REQUESTOR"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "ENTRY_DATE"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "ENTRY_TIME"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "REL_CODE"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "PRIM_LEVEL"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "PRIM_APPROVER"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "DEV_TYPE"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "MAIN_LEVEL"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "MAIN_APPROVER"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "MAIN_ACTION"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "MAIN_DATE"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "MAIN_TIME"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "PRIM_ACTION"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "PRIM_DATE"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "PRIM_TIME"
+		session.findById("wnd[0]/shellcont[1]/shell").selectColumn "COMMENTS"
+		session.findById("wnd[0]/shellcont[1]/shell").contextMenu
+		session.findById("wnd[0]/shellcont[1]/shell").selectContextMenuItem "&XXL"
+		session.findById("wnd[1]/usr/chkCB_ALWAYS").setFocus
+		session.findById("wnd[1]/usr/chkCB_ALWAYS").selected = true
+		session.findById("wnd[1]/tbar[0]/btn[0]").press
+		session.findById("wnd[1]/usr/ctxtDY_PATH").text = GLOBAL_FOLDER_PATH & ARRAY_SAP_TRANSACTIONS(7)
+		session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = "__REPORT_SISMF_ZEPRMM012_" & INDEX_ZEP & "__.XLSX"
+		session.findById("wnd[1]/tbar[0]/btn[0]").press
+		session.findById("wnd[1]/tbar[0]/btn[11]").press
+		session.findById("wnd[0]/tbar[0]/btn[3]").press
+		session.findById("wnd[0]/tbar[0]/btn[3]").press
+		WScript.Sleep 7000
+		SISMF_CLOSE_EXCEL()
+	Next
+End Sub
+
+SISMF_GET_DATA_SAP_ZEPRMM012()
+
+Rem ===============================================================================================
+Rem        JAMAIS DESISTA DOS SEUS SONHOS, PERSISTA, VAI DAR CERTO!!!
+Rem ===============================================================================================
